@@ -4,7 +4,7 @@
 //
 
 #if !os(Linux)
-import SwiftUI
+    import SwiftUI
 #endif
 
 public enum AppVersionState: String, CaseIterable, Codable, Sendable {
@@ -25,18 +25,18 @@ public enum AppVersionState: String, CaseIterable, Codable, Sendable {
     case waitingForReview = "WAITING_FOR_REVIEW"
 
     #if !os(Linux)
-    public var statusColor: Color {
-        switch self {
-        case .accepted, .readyForDistribution:
-            .green
-        case .inReview, .readyForReview, .pendingAppleRelease, .pendingDeveloperRelease, .processingForDistribution, .waitingForReview, .waitingForExportCompliance:
-            .yellow
-        case .developerRejected, .rejected, .metadataRejected, .invalidBinary, .replacedWithNewVersion:
-            .red
-        case .prepareForSubmission:
-            .gray
+        public var statusColor: Color {
+            switch self {
+            case .accepted, .readyForDistribution:
+                .green
+            case .inReview, .readyForReview, .pendingAppleRelease, .pendingDeveloperRelease, .processingForDistribution, .waitingForReview, .waitingForExportCompliance:
+                .yellow
+            case .developerRejected, .rejected, .metadataRejected, .invalidBinary, .replacedWithNewVersion:
+                .red
+            case .prepareForSubmission:
+                .gray
+            }
         }
-    }
     #endif
 
     // Computed property to return display-friendly name

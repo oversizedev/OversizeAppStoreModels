@@ -6,7 +6,7 @@
 import AppStoreAPI
 import Foundation
 #if !os(Linux)
-import SwiftUI
+    import SwiftUI
 #endif
 
 public struct SubscriptionLocalization: Codable, Equatable, Identifiable, Sendable {
@@ -46,13 +46,13 @@ public struct SubscriptionLocalization: Codable, Equatable, Identifiable, Sendab
         }
 
         #if !os(Linux)
-        public var statusColor: Color {
-            switch self {
-            case .waitingForReview, .prepareForSubmission: .yellow
-            case .approved: .green
-            case .rejected: .red
+            public var statusColor: Color {
+                switch self {
+                case .waitingForReview, .prepareForSubmission: .yellow
+                case .approved: .green
+                case .rejected: .red
+                }
             }
-        }
         #endif
     }
 }

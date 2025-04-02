@@ -4,7 +4,7 @@
 //
 
 #if !os(Linux)
-import SwiftUI
+    import SwiftUI
 #endif
 
 public enum InAppPurchaseState: String, CaseIterable, Codable, Sendable {
@@ -22,16 +22,16 @@ public enum InAppPurchaseState: String, CaseIterable, Codable, Sendable {
     case rejected = "REJECTED"
 
     #if !os(Linux)
-    public var statusColor: Color {
-        switch self {
-        case .approved:
-            .green
-        case .waitingForUpload, .processingContent, .readyToSubmit, .waitingForReview, .inReview, .pendingBinaryApproval, .missingMetadata:
-            .yellow
-        case .developerActionNeeded, .developerRemovedFromSale, .removedFromSale, .rejected:
-            .red
+        public var statusColor: Color {
+            switch self {
+            case .approved:
+                .green
+            case .waitingForUpload, .processingContent, .readyToSubmit, .waitingForReview, .inReview, .pendingBinaryApproval, .missingMetadata:
+                .yellow
+            case .developerActionNeeded, .developerRemovedFromSale, .removedFromSale, .rejected:
+                .red
+            }
         }
-    }
     #endif
 
     // Computed property to return display-friendly name
