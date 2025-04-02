@@ -3,7 +3,9 @@
 // Platform.swift, created on 06.10.2024
 //
 
+#if !os(Linux)
 import SwiftUI
+#endif
 
 public enum Platform: String, CaseIterable, Codable, Sendable, Identifiable {
     case ios = "IOS"
@@ -25,7 +27,7 @@ public enum Platform: String, CaseIterable, Codable, Sendable, Identifiable {
         }
     }
 
-    // Computed property for icon
+    #if !os(Linux)
     public var icon: Image {
         switch self {
         case .ios:
@@ -38,6 +40,7 @@ public enum Platform: String, CaseIterable, Codable, Sendable, Identifiable {
             Image(systemName: "vision.pro")
         }
     }
+    #endif
 
     public var id: String { rawValue }
 }

@@ -167,7 +167,7 @@ public extension App {
         public let appStoreVersions: [AppStoreVersion]
         public let builds: [Build]
         public let prereleaseVersions: [PrereleaseVersion]
-        
+
         public var firsrVersion: AppStoreVersion? {
             appStoreVersions.first
         }

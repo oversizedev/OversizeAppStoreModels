@@ -5,7 +5,9 @@
 
 import AppStoreAPI
 import Foundation
+#if !os(Linux)
 import SwiftUI
+#endif
 
 public struct AppCategory: Identifiable, Sendable {
     public let id: String
@@ -109,6 +111,7 @@ public extension AppCategory {
         }
     }
 
+#if !os(Linux)
     var image: Image {
         switch id {
         case "STICKERS_EMOJI_AND_EXPRESSIONS": Image(systemName: "face.smiling.fill")
@@ -168,4 +171,5 @@ public extension AppCategory {
         default: Image(systemName: "questionmark.circle.fill")
         }
     }
+    #endif
 }

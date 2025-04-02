@@ -3,7 +3,9 @@
 // AppVersionState.swift, created on 06.10.2024
 //
 
+#if !os(Linux)
 import SwiftUI
+#endif
 
 public enum AppVersionState: String, CaseIterable, Codable, Sendable {
     case accepted = "ACCEPTED"
@@ -22,7 +24,7 @@ public enum AppVersionState: String, CaseIterable, Codable, Sendable {
     case waitingForExportCompliance = "WAITING_FOR_EXPORT_COMPLIANCE"
     case waitingForReview = "WAITING_FOR_REVIEW"
 
-    // Computed property to return color based on the state
+    #if !os(Linux)
     public var statusColor: Color {
         switch self {
         case .accepted, .readyForDistribution:
@@ -35,6 +37,7 @@ public enum AppVersionState: String, CaseIterable, Codable, Sendable {
             .gray
         }
     }
+    #endif
 
     // Computed property to return display-friendly name
     public var displayName: String {

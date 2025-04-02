@@ -3,7 +3,9 @@
 // InAppPurchaseState.swift, created on 02.01.2025
 //
 
+#if !os(Linux)
 import SwiftUI
+#endif
 
 public enum InAppPurchaseState: String, CaseIterable, Codable, Sendable {
     case missingMetadata = "MISSING_METADATA"
@@ -19,7 +21,7 @@ public enum InAppPurchaseState: String, CaseIterable, Codable, Sendable {
     case removedFromSale = "REMOVED_FROM_SALE"
     case rejected = "REJECTED"
 
-    // Computed property to return color based on the state
+    #if !os(Linux)
     public var statusColor: Color {
         switch self {
         case .approved:
@@ -30,6 +32,7 @@ public enum InAppPurchaseState: String, CaseIterable, Codable, Sendable {
             .red
         }
     }
+    #endif
 
     // Computed property to return display-friendly name
     public var displayName: String {
