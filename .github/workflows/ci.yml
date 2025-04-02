@@ -55,6 +55,7 @@ jobs:
 
   build-macos:
     name: Build SwiftPM
+    needs: swift-format
     uses: oversizedev/GithubWorkflows/.github/workflows/build-swiftpm.yml@main
     if: github.ref == 'refs/heads/main' && !startsWith(github.ref, 'refs/tags/')
     with:
@@ -64,6 +65,7 @@ jobs:
     
   build-linux:
     name: Build Linux
+    needs: swift-format
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && !startsWith(github.ref, 'refs/tags/')
     steps:
@@ -82,7 +84,7 @@ jobs:
   bump:
     name: Bump version
     needs:
-      - build-swiftpm
+      - build-macos
       - build-linux
     if: github.ref == 'refs/heads/main'
     uses: oversizedev/GithubWorkflows/.github/workflows/bump.yml@main
