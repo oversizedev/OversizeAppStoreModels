@@ -4,7 +4,7 @@
 //
 
 #if !os(Linux)
-    import SwiftUI
+import SwiftUI
 #endif
 
 public enum AppStoreVersionState: String, CaseIterable, Codable, Sendable {
@@ -30,22 +30,22 @@ public enum AppStoreVersionState: String, CaseIterable, Codable, Sendable {
     case notApplicable = "NOT_APPLICABLE"
 
     #if !os(Linux)
-        public var statusColor: Color {
-            switch self {
-            case .accepted, .readyForSale, .preorderReadyForSale:
-                .green
-            case .inReview, .readyForReview, .pendingAppleRelease, .pendingDeveloperRelease, .processingForAppStore, .waitingForReview, .waitingForExportCompliance:
-                .yellow
-            case .developerRemovedFromSale, .removedFromSale:
-                .orange
-            case .developerRejected, .rejected, .metadataRejected, .invalidBinary, .replacedWithNewVersion:
-                .red
-            case .pendingContract:
-                .purple
-            case .prepareForSubmission, .notApplicable:
-                .gray
-            }
+    public var statusColor: Color {
+        switch self {
+        case .accepted, .readyForSale, .preorderReadyForSale:
+            .green
+        case .inReview, .readyForReview, .pendingAppleRelease, .pendingDeveloperRelease, .processingForAppStore, .waitingForReview, .waitingForExportCompliance:
+            .yellow
+        case .developerRemovedFromSale, .removedFromSale:
+            .orange
+        case .developerRejected, .rejected, .metadataRejected, .invalidBinary, .replacedWithNewVersion:
+            .red
+        case .pendingContract:
+            .purple
+        case .prepareForSubmission, .notApplicable:
+            .gray
         }
+    }
     #endif
 
     // Computed property to return display-friendly name
@@ -104,13 +104,13 @@ public enum AppStoreVersionState: String, CaseIterable, Codable, Sendable {
     }
 
     #if !os(Linux)
-        public var isCanBeHidden: Bool {
-            switch self {
-            case .replacedWithNewVersion:
-                true
-            default:
-                false
-            }
+    public var isCanBeHidden: Bool {
+        switch self {
+        case .replacedWithNewVersion:
+            true
+        default:
+            false
         }
+    }
     #endif
 }

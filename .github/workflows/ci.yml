@@ -17,11 +17,11 @@ jobs:
   swift-format:
     name: Swift Format
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && !startsWith(github.ref, 'refs/tags/')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Swift
@@ -31,22 +31,26 @@ jobs:
 
       - name: Install SwiftFormat
         run: |
-          git clone https://github.com/nicklockwood/SwiftFormat
-          cd SwiftFormat
+          # Install SwiftFormat using Swift Package Manager directly without cloning
+          git clone --depth=1 https://github.com/nicklockwood/SwiftFormat SwiftFormatTool
+          cd SwiftFormatTool
           swift build -c release
           sudo cp .build/release/swiftformat /usr/local/bin/swiftformat
+          cd ..
+          rm -rf SwiftFormatTool
 
       - name: Configure Git
         run: |
-          git config --local user.name "GitHub Actions"
-          git config --local user.email "actions@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Run SwiftFormat and commit changes
         run: |
           swiftformat .
           git add .
           if ! git diff-index --quiet HEAD; then
-            git commit -m "Apply SwiftFormat changes [skip ci]"
+            formatted_date=$(date -u +"%Y-%m-%d %H:%M:%S")
+            git commit -m "Apply SwiftFormat changes by ${{ github.actor }} on ${formatted_date} UTC [skip ci]"
             git push
             echo "Formatting changes committed and pushed"
           else
@@ -57,7 +61,6 @@ jobs:
     name: Build SwiftPM
     needs: swift-format
     uses: oversizedev/GithubWorkflows/.github/workflows/build-swiftpm.yml@main
-    if: github.ref == 'refs/heads/main' && !startsWith(github.ref, 'refs/tags/')
     with:
       package: OversizeAppStoreModels
       destination: platform=macOS,arch=arm64
@@ -67,7 +70,6 @@ jobs:
     name: Build Linux
     needs: swift-format
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && !startsWith(github.ref, 'refs/tags/')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

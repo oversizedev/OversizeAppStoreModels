@@ -4,7 +4,7 @@
 //
 
 #if !os(Linux)
-    import SwiftUI
+import SwiftUI
 #endif
 
 public enum Platform: String, CaseIterable, Codable, Sendable, Identifiable {
@@ -28,18 +28,18 @@ public enum Platform: String, CaseIterable, Codable, Sendable, Identifiable {
     }
 
     #if !os(Linux)
-        public var icon: Image {
-            switch self {
-            case .ios:
-                Image(systemName: "iphone")
-            case .macOs:
-                Image(systemName: "laptopcomputer")
-            case .tvOs:
-                Image(systemName: "appletv.fill")
-            case .visionOs:
-                Image(systemName: "vision.pro")
-            }
+    public var icon: Image {
+        switch self {
+        case .ios:
+            Image(systemName: "iphone")
+        case .macOs:
+            Image(systemName: "laptopcomputer")
+        case .tvOs:
+            Image(systemName: "appletv.fill")
+        case .visionOs:
+            Image(systemName: "vision.pro")
         }
+    }
     #endif
 
     public var id: String { rawValue }

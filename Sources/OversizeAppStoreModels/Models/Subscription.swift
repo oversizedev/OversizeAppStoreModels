@@ -6,7 +6,7 @@
 import AppStoreAPI
 import Foundation
 #if !os(Linux)
-    import SwiftUI
+import SwiftUI
 #endif
 
 public struct Subscription: Sendable, Identifiable {
@@ -70,16 +70,16 @@ public struct Subscription: Sendable, Identifiable {
         case rejected = "REJECTED"
 
         #if !os(Linux)
-            public var statusColor: Color {
-                switch self {
-                case .approved:
-                    .green
-                case .readyToSubmit, .waitingForReview, .inReview, .pendingBinaryApproval, .missingMetadata:
-                    .yellow
-                case .developerActionNeeded, .developerRemovedFromSale, .removedFromSale, .rejected:
-                    .red
-                }
+        public var statusColor: Color {
+            switch self {
+            case .approved:
+                .green
+            case .readyToSubmit, .waitingForReview, .inReview, .pendingBinaryApproval, .missingMetadata:
+                .yellow
+            case .developerActionNeeded, .developerRemovedFromSale, .removedFromSale, .rejected:
+                .red
             }
+        }
         #endif
 
         // Computed property to return display-friendly name
