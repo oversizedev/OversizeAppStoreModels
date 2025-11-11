@@ -6,7 +6,6 @@
 import AppStoreAPI
 import Foundation
 
-
 public struct SubscriptionIntroductoryOffer: Sendable, Identifiable {
     public let id: String
     public let startDate: Date?

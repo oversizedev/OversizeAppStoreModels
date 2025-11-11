@@ -1,7 +1,7 @@
 //
 // Copyright © 2025 Alexander Romanov
 // Bool.swift, created on 11.11.2025
-//  
+//
 
 public extension Bool? {
     var valueOrFalse: Bool {
