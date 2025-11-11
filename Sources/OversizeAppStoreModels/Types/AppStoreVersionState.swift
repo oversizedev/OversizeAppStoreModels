@@ -3,7 +3,9 @@
 // AppStoreVersionState.swift, created on 06.10.2024
 //
 
+#if !os(Linux)
 import SwiftUI
+#endif
 
 public enum AppStoreVersionState: String, CaseIterable, Codable, Sendable {
     case accepted = "ACCEPTED"
@@ -27,7 +29,7 @@ public enum AppStoreVersionState: String, CaseIterable, Codable, Sendable {
     case replacedWithNewVersion = "REPLACED_WITH_NEW_VERSION"
     case notApplicable = "NOT_APPLICABLE"
 
-    // Computed property to return color based on the state
+    #if !os(Linux)
     public var statusColor: Color {
         switch self {
         case .accepted, .readyForSale, .preorderReadyForSale:
@@ -44,8 +46,8 @@ public enum AppStoreVersionState: String, CaseIterable, Codable, Sendable {
             .gray
         }
     }
+    #endif
 
-    // Computed property to return display-friendly name
     public var displayName: String {
         switch self {
         case .accepted:
