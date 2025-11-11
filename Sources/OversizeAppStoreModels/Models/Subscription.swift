@@ -5,9 +5,7 @@
 
 import AppStoreAPI
 import Foundation
-#if !os(Linux)
 import SwiftUI
-#endif
 
 public struct Subscription: Sendable, Identifiable {
     public let id: String
@@ -29,10 +27,10 @@ public struct Subscription: Sendable, Identifiable {
         else { return nil }
         self.state = state
         id = schema.id
-        name = attributes.name ?? ""
-        productID = attributes.productID ?? ""
+        name = attributes.name.valueOrEmpty
+        productID = attributes.productID.valueOrEmpty
         isFamilySharable = attributes.isFamilySharable
-        reviewNote = attributes.reviewNote ?? ""
+        reviewNote = attributes.reviewNote.valueOrEmpty
         groupLevel = attributes.groupLevel
         if let subscriptionPeriod = attributes.subscriptionPeriod?.rawValue {
             self.subscriptionPeriod = .init(rawValue: subscriptionPeriod)
@@ -51,7 +49,7 @@ public struct Subscription: Sendable, Identifiable {
             introductoryOffersIds: schema.relationships?.introductoryOffers?.data?.map { $0.id },
             promotionalOffersIds: schema.relationships?.promotionalOffers?.data?.map { $0.id },
             winBackOffersIds: schema.relationships?.winBackOffers?.data?.map { $0.id },
-            imagesIds: schema.relationships?.images?.data?.map { $0.id }
+            imagesIds: schema.relationships?.images?.data?.map { $0.id },
         )
 
         self.included = .init(included: included)
@@ -69,7 +67,7 @@ public struct Subscription: Sendable, Identifiable {
         case removedFromSale = "REMOVED_FROM_SALE"
         case rejected = "REJECTED"
 
-        #if !os(Linux)
+        // Computed property to return color based on the state
         public var statusColor: Color {
             switch self {
             case .approved:
@@ -80,7 +78,6 @@ public struct Subscription: Sendable, Identifiable {
                 .red
             }
         }
-        #endif
 
         // Computed property to return display-friendly name
         public var displayName: String {
@@ -143,7 +140,7 @@ public struct Subscription: Sendable, Identifiable {
             introductoryOffersIds: [String]? = nil,
             promotionalOffersIds: [String]? = nil,
             winBackOffersIds: [String]? = nil,
-            imagesIds: [String]? = nil
+            imagesIds: [String]? = nil,
         ) {
             self.subscriptionLocalizationsIds = subscriptionLocalizationsIds
             self.subscriptionPricesIds = subscriptionPricesIds
@@ -183,7 +180,7 @@ public struct Subscription: Sendable, Identifiable {
             introductoryOffers: [SubscriptionIntroductoryOffer]? = nil,
             promotionalOffers: [SubscriptionPromotionalOffer]? = nil,
             winBackOffers: [WinBackOffer]? = nil,
-            subscriptionImages: [SubscriptionImage]? = nil
+            subscriptionImages: [SubscriptionImage]? = nil,
         ) {
             self.subscriptionLocalizations = subscriptionLocalizations
             self.subscriptionPrices = subscriptionPrices

@@ -21,13 +21,13 @@ public struct AppStoreReviewDetail: Sendable {
     public init?(schema: AppStoreAPI.AppStoreReviewDetail) {
         guard let attributes = schema.attributes else { return nil }
         id = schema.id
-        contactFirstName = attributes.contactFirstName ?? ""
-        contactLastName = attributes.contactLastName ?? ""
-        contactPhone = attributes.contactPhone ?? ""
-        contactEmail = attributes.contactEmail ?? ""
-        demoAccountName = attributes.demoAccountName ?? ""
-        demoAccountPassword = attributes.demoAccountPassword ?? ""
-        isDemoAccountRequired = attributes.isDemoAccountRequired ?? false
-        notes = attributes.notes ?? ""
+        contactFirstName = attributes.contactFirstName.valueOrEmpty
+        contactLastName = attributes.contactLastName.valueOrEmpty
+        contactPhone = attributes.contactPhone.valueOrEmpty
+        contactEmail = attributes.contactEmail.valueOrEmpty
+        demoAccountName = attributes.demoAccountName.valueOrEmpty
+        demoAccountPassword = attributes.demoAccountPassword.valueOrEmpty
+        isDemoAccountRequired = attributes.isDemoAccountRequired.valueOrFalse
+        notes = attributes.notes.valueOrEmpty
     }
 }

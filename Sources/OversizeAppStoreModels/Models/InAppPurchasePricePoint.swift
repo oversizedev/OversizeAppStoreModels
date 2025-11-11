@@ -15,8 +15,8 @@ public struct InAppPurchasePricePoint: Identifiable, Sendable {
     public init?(schema: AppStoreAPI.InAppPurchasePricePoint, included: [AppStoreAPI.Territory]? = nil) {
         guard let attributes = schema.attributes else { return nil }
         id = schema.id
-        customerPrice = attributes.customerPrice ?? ""
-        proceeds = attributes.proceeds ?? ""
+        customerPrice = attributes.customerPrice.valueOrEmpty
+        proceeds = attributes.proceeds.valueOrEmpty
         relationships = .init(territoryId: schema.relationships?.territory?.data?.id)
 
         if let territory = included?.first(where: { $0.id == schema.relationships?.territory?.data?.id }) {

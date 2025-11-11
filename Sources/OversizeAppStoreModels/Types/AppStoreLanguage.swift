@@ -3,6 +3,8 @@
 // AppStoreLanguage.swift, created on 23.07.2024
 //
 
+import Foundation
+
 public enum AppStoreLanguage: String, CaseIterable, Codable, Sendable, Identifiable {
     public var id: String { rawValue }
 

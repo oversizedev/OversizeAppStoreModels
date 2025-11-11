@@ -6,6 +6,7 @@
 import AppStoreAPI
 import Foundation
 
+
 public struct SubscriptionIntroductoryOffer: Sendable, Identifiable {
     public let id: String
     public let startDate: Date?
@@ -22,8 +23,8 @@ public struct SubscriptionIntroductoryOffer: Sendable, Identifiable {
 
         id = schema.id
 
-        startDate = attributes.startDate?.toDate()
-        endDate = attributes.endDate?.toDate()
+        startDate = attributes.startDate.valueOrEmpty.toDate()
+        endDate = attributes.endDate.valueOrEmpty.toDate()
         duration = .init(rawValue: attributes.duration?.rawValue ?? "")
         offerMode = .init(rawValue: attributes.offerMode?.rawValue ?? "")
         numberOfPeriods = attributes.numberOfPeriods
@@ -31,7 +32,7 @@ public struct SubscriptionIntroductoryOffer: Sendable, Identifiable {
         relationships = Relationships(
             subscriptionId: schema.relationships?.subscription?.data?.id,
             territoryId: schema.relationships?.territory?.data?.id,
-            subscriptionPricePointId: schema.relationships?.subscriptionPricePoint?.data?.id
+            subscriptionPricePointId: schema.relationships?.subscriptionPricePoint?.data?.id,
         )
 
         self.included = .init(
@@ -46,7 +47,7 @@ public struct SubscriptionIntroductoryOffer: Sendable, Identifiable {
             subscriptionPricePoint: included?.compactMap { item -> SubscriptionPricePoint? in
                 if case let .subscriptionPricePoint(value) = item { return .init(schema: value) }
                 return nil
-            }.first
+            }.first,
         )
     }
 
@@ -58,7 +59,7 @@ public struct SubscriptionIntroductoryOffer: Sendable, Identifiable {
         public init(
             subscriptionId: String? = nil,
             territoryId: String? = nil,
-            subscriptionPricePointId: String? = nil
+            subscriptionPricePointId: String? = nil,
         ) {
             self.subscriptionId = subscriptionId
             self.territoryId = territoryId
@@ -74,7 +75,7 @@ public struct SubscriptionIntroductoryOffer: Sendable, Identifiable {
         public init(
             subscription: Subscription? = nil,
             territory: Territory? = nil,
-            subscriptionPricePoint: SubscriptionPricePoint? = nil
+            subscriptionPricePoint: SubscriptionPricePoint? = nil,
         ) {
             self.subscription = subscription
             self.territory = territory

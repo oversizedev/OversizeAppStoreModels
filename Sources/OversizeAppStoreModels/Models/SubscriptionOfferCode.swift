@@ -14,7 +14,6 @@ public struct SubscriptionOfferCode: Identifiable, Sendable {
     public let duration: SubscriptionOfferDuration?
     public let offerMode: SubscriptionOfferMode?
     public let numberOfPeriods: Int?
-    public let totalNumberOfCodes: Int?
     public let isActive: Bool?
 
     public let relationships: Relationships?
@@ -30,14 +29,13 @@ public struct SubscriptionOfferCode: Identifiable, Sendable {
         duration = .init(rawValue: attributes.duration?.rawValue ?? "")
         offerMode = .init(rawValue: attributes.offerMode?.rawValue ?? "")
         numberOfPeriods = attributes.numberOfPeriods
-        totalNumberOfCodes = attributes.totalNumberOfCodes
         isActive = attributes.isActive
 
         relationships = .init(
             subscriptionId: schema.relationships?.subscription?.data?.id,
             oneTimeUseCodesIds: schema.relationships?.oneTimeUseCodes?.data?.compactMap { $0.id } ?? [],
             customCodesIds: schema.relationships?.customCodes?.data?.compactMap { $0.id } ?? [],
-            pricesIds: schema.relationships?.prices?.data?.compactMap { $0.id } ?? []
+            pricesIds: schema.relationships?.prices?.data?.compactMap { $0.id } ?? [],
         )
 
         var subscriptions: [AppStoreAPI.Subscription] = []
@@ -70,7 +68,7 @@ public struct SubscriptionOfferCode: Identifiable, Sendable {
                 subscriptions: subscriptions.compactMap { .init(schema: $0) },
                 oneTimeUseCodes: oneTimeUseCodes.compactMap { .init(schema: $0) },
                 customCodes: customCodes.compactMap { .init(schema: $0) },
-                prices: prices.compactMap { .init(schema: $0) }
+                prices: prices.compactMap { .init(schema: $0) },
             )
         } else {
             self.included = nil

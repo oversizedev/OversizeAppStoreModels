@@ -3,6 +3,8 @@
 // SubscriptionStatusURLVersion.swift, created on 28.08.2024
 //
 
+import Foundation
+
 public enum SubscriptionStatusURLVersion: String, CaseIterable, Codable, Sendable {
     case v1 = "V1"
     case v2 = "V2"

@@ -5,9 +5,7 @@
 
 import AppStoreAPI
 import Foundation
-#if !os(Linux)
 import SwiftUI
-#endif
 
 public struct SubscriptionLocalization: Codable, Equatable, Identifiable, Sendable {
     public let id: String
@@ -26,7 +24,7 @@ public struct SubscriptionLocalization: Codable, Equatable, Identifiable, Sendab
         self.locale = locale
         self.state = state
         id = schema.id
-        name = attributes.name ?? ""
+        name = attributes.name.valueOrEmpty
         description = schema.attributes?.description
     }
 
@@ -36,6 +34,7 @@ public struct SubscriptionLocalization: Codable, Equatable, Identifiable, Sendab
         case approved = "APPROVED"
         case rejected = "REJECTED"
 
+        // Computed property for display name
         public var displayName: String {
             switch self {
             case .prepareForSubmission: "Prepare for Submission"
@@ -45,7 +44,7 @@ public struct SubscriptionLocalization: Codable, Equatable, Identifiable, Sendab
             }
         }
 
-        #if !os(Linux)
+        // Computed property for status color
         public var statusColor: Color {
             switch self {
             case .waitingForReview, .prepareForSubmission: .yellow
@@ -53,6 +52,5 @@ public struct SubscriptionLocalization: Codable, Equatable, Identifiable, Sendab
             case .rejected: .red
             }
         }
-        #endif
     }
 }

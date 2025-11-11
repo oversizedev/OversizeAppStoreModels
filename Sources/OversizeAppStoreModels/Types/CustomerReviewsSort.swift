@@ -3,6 +3,8 @@
 // CustomerReviewsSort.swift, created on 24.11.2024
 //
 
+import Foundation
+
 public enum CustomerReviewsSort: String, CaseIterable, Codable, Sendable, Identifiable {
     case minusCreatedDate = "-createdDate"
     case createdDate

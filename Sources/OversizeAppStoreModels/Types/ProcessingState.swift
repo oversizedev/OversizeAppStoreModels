@@ -3,6 +3,8 @@
 // ProcessingState.swift, created on 28.08.2024
 //
 
+import Foundation
+
 public enum ProcessingState: String, CaseIterable, Codable, Sendable {
     case processing = "PROCESSING"
     case failed = "FAILED"

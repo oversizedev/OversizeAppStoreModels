@@ -3,6 +3,8 @@
 // InAppPurchaseType.swift, created on 02.01.2025
 //
 
+import Foundation
+
 public enum InAppPurchaseType: String, CaseIterable, Codable, Sendable, Identifiable {
     case consumable = "CONSUMABLE"
     case nonConsumable = "NON_CONSUMABLE"

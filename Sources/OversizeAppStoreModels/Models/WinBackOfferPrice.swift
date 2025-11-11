@@ -15,7 +15,7 @@ public struct WinBackOfferPrice: Sendable, Identifiable {
 
         relationships = Relationships(
             territoryId: schema.relationships?.territory?.data?.id,
-            subscriptionPricePointId: schema.relationships?.subscriptionPricePoint?.data?.id
+            subscriptionPricePointId: schema.relationships?.subscriptionPricePoint?.data?.id,
         )
 
         self.included = .init(
@@ -26,7 +26,7 @@ public struct WinBackOfferPrice: Sendable, Identifiable {
             subscriptionPricePoint: included?.compactMap { item -> SubscriptionPricePoint? in
                 if case let .subscriptionPricePoint(value) = item { return .init(schema: value) }
                 return nil
-            }.first
+            }.first,
         )
     }
 
@@ -43,7 +43,7 @@ public struct WinBackOfferPrice: Sendable, Identifiable {
 
         public init(
             territoryId: String? = nil,
-            subscriptionPricePointId: String? = nil
+            subscriptionPricePointId: String? = nil,
         ) {
             self.territoryId = territoryId
             self.subscriptionPricePointId = subscriptionPricePointId
@@ -56,7 +56,7 @@ public struct WinBackOfferPrice: Sendable, Identifiable {
 
         public init(
             territory: Territory? = nil,
-            subscriptionPricePoint: SubscriptionPricePoint? = nil
+            subscriptionPricePoint: SubscriptionPricePoint? = nil,
         ) {
             self.territory = territory
             self.subscriptionPricePoint = subscriptionPricePoint

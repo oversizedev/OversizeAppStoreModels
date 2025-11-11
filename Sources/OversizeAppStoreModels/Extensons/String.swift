@@ -12,3 +12,12 @@ public extension String {
         return formatter.date(from: self)
     }
 }
+
+public extension String? {
+    var valueOrEmpty: String {
+        guard let unwrapped = self else {
+            return ""
+        }
+        return unwrapped
+    }
+}

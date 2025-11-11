@@ -3,6 +3,8 @@
 // SubscriptionOfferDuration.swift, created on 05.02.2025
 //
 
+import Foundation
+
 public enum SubscriptionOfferDuration: String, CaseIterable, Codable, Sendable, Identifiable {
     case threeDays = "THREE_DAYS"
     case oneWeek = "ONE_WEEK"

@@ -3,6 +3,8 @@
 // TerritoryCode.swift, created on 22.11.2024
 //
 
+import Foundation
+
 public enum TerritoryCode: String, CaseIterable, Codable, Sendable {
     case abw = "ABW"
     case afg = "AFG"

@@ -10,7 +10,6 @@ public struct AgeRatingDeclaration: Sendable {
 
     public var alcoholTobaccoOrDrugUseOrReferences: AppStoreAgeRatingDeclaration?
     public var contests: AppStoreAgeRatingDeclaration?
-    public var isGamblingAndContests: Bool?
     public var isGambling: Bool?
     public var gamblingSimulated: AppStoreAgeRatingDeclaration?
     public var kidsAgeBand: KidsAgeBand?
@@ -25,16 +24,13 @@ public struct AgeRatingDeclaration: Sendable {
     public var violenceCartoonOrFantasy: AppStoreAgeRatingDeclaration?
     public var violenceRealisticProlongedGraphicOrSadistic: AppStoreAgeRatingDeclaration?
     public var violenceRealistic: AppStoreAgeRatingDeclaration?
-    public var ageRatingOverride: AgeRatingOverride?
     public var koreaAgeRatingOverride: KoreaAgeRatingOverride?
-    public var isSeventeenPlus: Bool?
 
     public init?(schema: AppStoreAPI.AgeRatingDeclaration) {
         guard let attributes = schema.attributes else { return nil }
         id = schema.id
         alcoholTobaccoOrDrugUseOrReferences = attributes.alcoholTobaccoOrDrugUseOrReferences.flatMap { AppStoreAgeRatingDeclaration(rawValue: $0.rawValue) }
         contests = attributes.contests.flatMap { AppStoreAgeRatingDeclaration(rawValue: $0.rawValue) }
-        isGamblingAndContests = attributes.isGamblingAndContests
         isGambling = attributes.isGambling
         gamblingSimulated = attributes.gamblingSimulated.flatMap { AppStoreAgeRatingDeclaration(rawValue: $0.rawValue) }
         kidsAgeBand = attributes.kidsAgeBand.flatMap { KidsAgeBand(rawValue: $0.rawValue) }
@@ -49,8 +45,6 @@ public struct AgeRatingDeclaration: Sendable {
         violenceCartoonOrFantasy = attributes.violenceCartoonOrFantasy.flatMap { AppStoreAgeRatingDeclaration(rawValue: $0.rawValue) }
         violenceRealisticProlongedGraphicOrSadistic = attributes.violenceRealisticProlongedGraphicOrSadistic.flatMap { AppStoreAgeRatingDeclaration(rawValue: $0.rawValue) }
         violenceRealistic = attributes.violenceRealistic.flatMap { AppStoreAgeRatingDeclaration(rawValue: $0.rawValue) }
-        ageRatingOverride = attributes.ageRatingOverride.flatMap { AgeRatingOverride(rawValue: $0.rawValue) }
         koreaAgeRatingOverride = attributes.koreaAgeRatingOverride.flatMap { KoreaAgeRatingOverride(rawValue: $0.rawValue) }
-        isSeventeenPlus = attributes.isSeventeenPlus
     }
 }

@@ -22,7 +22,7 @@ public struct AppStoreVersion: Sendable, Identifiable {
     public let included: Included?
     public let relationships: Relationships?
 
-    public init?(schema: AppStoreAPI.AppStoreVersion, included: [AppStoreAPI.AppStoreVersionsResponse.IncludedItem]? = nil) {
+    init?(schema: AppStoreAPI.AppStoreVersion, included: [AppStoreAPI.AppStoreVersionsResponse.IncludedItem]? = nil) {
         guard let storeState = schema.attributes?.appStoreState?.rawValue,
               let storeStateType: AppStoreVersionState = .init(rawValue: storeState),
               let state = schema.attributes?.appVersionState?.rawValue,
@@ -76,11 +76,11 @@ public struct AppStoreVersion: Sendable, Identifiable {
             },
             appStoreReviewDetail: includedAppStoreReviewDetail.flatMap { reviewDetails in
                 reviewDetails.compactMap(AppStoreReviewDetail.init)
-            }
+            },
         )
 
         relationships = .init(
-            appStoreVersionLocalizationsIds: schema.relationships?.appStoreVersionLocalizations?.data?.compactMap { $0.id }
+            appStoreVersionLocalizationsIds: schema.relationships?.appStoreVersionLocalizations?.data?.compactMap { $0.id },
         )
     }
 

@@ -3,6 +3,8 @@
 // SubscriptionPeriod.swift, created on 02.02.2025
 //
 
+import Foundation
+
 public enum SubscriptionPeriod: String, CaseIterable, Codable, Sendable, Identifiable {
     case oneWeek = "ONE_WEEK"
     case oneMonth = "ONE_MONTH"

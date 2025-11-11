@@ -3,6 +3,8 @@
 // AppStoreAgeRating.swift, created on 30.10.2024
 //
 
+import Foundation
+
 public enum AppStoreAgeRating: String, CaseIterable, Codable, Sendable {
     case fourPlus = "FOUR_PLUS"
     case ninePlus = "NINE_PLUS"

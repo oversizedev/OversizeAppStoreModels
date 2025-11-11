@@ -23,7 +23,7 @@ public struct SubscriptionGroupLocalization: Identifiable, Equatable, Hashable, 
         self.locale = locale
         self.state = state
         id = schema.id
-        name = attributes.name ?? ""
+        name = attributes.name.valueOrEmpty
         customAppName = schema.attributes?.customAppName
     }
 
