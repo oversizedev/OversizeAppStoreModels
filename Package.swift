@@ -27,8 +27,8 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "OversizeAppStoreModels",
-            targets: ["OversizeAppStoreModels"],
-        ),
+            targets: ["OversizeAppStoreModels"]
+        )
     ],
     dependencies: dependencies,
     targets: [
@@ -36,12 +36,12 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "OversizeAppStoreModels", dependencies: [
-                .product(name: "AppStoreConnect", package: "asc-swift"),
-            ],
+                .product(name: "AppStoreConnect", package: "asc-swift")
+            ]
         ),
         .testTarget(
             name: "OversizeAppStoreModelsTests",
-            dependencies: ["OversizeAppStoreModels"],
-        ),
+            dependencies: ["OversizeAppStoreModels"]
+        )
     ],
 )
